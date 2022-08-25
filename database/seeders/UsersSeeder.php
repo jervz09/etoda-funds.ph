@@ -19,14 +19,14 @@ class UsersSeeder extends Seeder
         $user = [
             [
                 'name' => 'Admin',
-                'email' => 'admin@onlinewebtutorblog.com',
+                'email' => 'admin@etoda-funds.ph',
                 'username' => 'admin',
                 'is_admin' => '1',
                 'password' => Hash::make('admin123'),
             ],
             [
                 'name' => 'User',
-                'email' => 'normal@onlinewebtutorblog.com',
+                'email' => 'user@etoda-funds.ph',
                 'username' => 'user_1',
                 'is_admin' => '0',
                 'password' => Hash::make('user123'),
