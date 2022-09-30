@@ -22,89 +22,24 @@
                         <th>Gender</th>
                         <th>Mobile</th>
                         <th colspan="2" class="text-center">Records</th>
-                        <th colspan="2" class="text-center">Actions</th>
+                        <th class="text-center">Actions</th>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>Renelle Sapin</td>
-                            <td>24</td>
-                            <td>Female</td>
-                            <td>9687375922</td>
-                            <td><a href="#" class="btn btn-xs btn-flat btn-block btn-success">Loans</a></td>
-                            <td><a href="#" class="btn btn-xs btn-flat btn-block btn-primary">Savings</a></td>
-                            <td class="text-center"><a href="" class="text-info"><i class="fas fa-pen"></i></a></td>
-                            <td class="text-center"><a href="" class="text-danger"><i class="fas fa-trash"></i></a></td>
-                        </tr>
-                        <tr>
-                            <td>Alberto Sotto Jr.</td>
-                            <td>22</td>
-                            <td>Male</td>
-                            <td>9679774392</td>
-                            <td><a href="#" class="btn btn-xs btn-flat btn-block btn-success">Loans</a></td>
-                            <td><a href="#" class="btn btn-xs btn-flat btn-block btn-primary">Savings</a></td>
-                            <td class="text-center"><a href="" class="text-info"><i class="fas fa-pen"></i></a></td>
-                            <td class="text-center"><a href="" class="text-danger"><i class="fas fa-trash"></i></a></td>
-                        </tr>
-                        <tr>
-                            <td>Alexus Smith</td>
-                            <td>22</td>
-                            <td>Male</td>
-                            <td>9998683281</td>
-                            <td><a href="#" class="btn btn-xs btn-flat btn-block btn-success">Loans</a></td>
-                            <td><a href="#" class="btn btn-xs btn-flat btn-block btn-primary">Savings</a></td>
-                            <td class="text-center"><a href="" class="text-info"><i class="fas fa-pen"></i></a></td>
-                            <td class="text-center"><a href="" class="text-danger"><i class="fas fa-trash"></i></a></td>
-                        </tr>
-                        <tr>
-                            <td>Tyler Frost</td>
-                            <td>26</td>
-                            <td>Male</td>
-                            <td>9687743902</td>
-                            <td><a href="#" class="btn btn-xs btn-flat btn-block btn-success">Loans</a></td>
-                            <td><a href="#" class="btn btn-xs btn-flat btn-block btn-primary">Savings</a></td>
-                            <td class="text-center"><a href="" class="text-info"><i class="fas fa-pen"></i></a></td>
-                            <td class="text-center"><a href="" class="text-danger"><i class="fas fa-trash"></i></a></td>
-                        </tr>
-                        <tr>
-                            <td>Racy Hudgens</td>
-                            <td>23</td>
-                            <td>Female</td>
-                            <td>9078974393</td>
-                            <td><a href="#" class="btn btn-xs btn-flat btn-block btn-success">Loans</a></td>
-                            <td><a href="#" class="btn btn-xs btn-flat btn-block btn-primary">Savings</a></td>
-                            <td class="text-center"><a href="" class="text-info"><i class="fas fa-pen"></i></a></td>
-                            <td class="text-center"><a href="" class="text-danger"><i class="fas fa-trash"></i></a></td>
-                        </tr>
-                        <tr>
-                            <td>Samantha Cruz</td>
-                            <td>28</td>
-                            <td>Female</td>
-                            <td>9759896345</td>
-                            <td><a href="#" class="btn btn-xs btn-flat btn-block btn-success">Loans</a></td>
-                            <td><a href="#" class="btn btn-xs btn-flat btn-block btn-primary">Savings</a></td>
-                            <td class="text-center"><a href="" class="text-info"><i class="fas fa-pen"></i></a></td>
-                            <td class="text-center"><a href="" class="text-danger"><i class="fas fa-trash"></i></a></td>
-                        </tr>
-                        <tr>
-                            <td>Vincenzo Cailles</td>
-                            <td>24</td>
-                            <td>Male</td>
-                            <td>9669789670</td>
-                            <td><a href="#" class="btn btn-xs btn-flat btn-block btn-success">Loans</a></td>
-                            <td><a href="#" class="btn btn-xs btn-flat btn-block btn-primary">Savings</a></td>
-                            <td class="text-center"><a href="" class="text-info"><i class="fas fa-pen"></i></a></td>
-                            <td class="text-center"><a href="" class="text-danger"><i class="fas fa-trash"></i></a></td>
-                        </tr>
-                        <tr>
-                            <td>Adie Alonzo</td>
-                            <td>22</td>
-                            <td>Male</td>
-                            <td>9685469211</td>
-                            <td><a href="#" class="btn btn-xs btn-flat btn-block btn-success">Loans</a></td>
-                            <td><a href="#" class="btn btn-xs btn-flat btn-block btn-primary">Savings</a></td>
-                            <td class="text-center"><a href="" class="text-info"><i class="fas fa-pen"></i></a></td>
-                            <td class="text-center"><a href="" class="text-danger"><i class="fas fa-trash"></i></a></td>
-                        </tr>
+                        @forelse ($members as $member)
+                            <tr>
+                                <td>{{$member->first_name.' '.$member->last_name}}</td>
+                                <td></td>
+                                <td>{{$member->gender}}</td>
+                                <td>{{$member->mobile_number}}</td>
+                                <td><a href="{{route('admin.member-loans', ['member_id' => $member->id])}}" class="btn btn-xs btn-flat btn-block btn-success">Loans</a></td>
+                                <td><a href="{{route('admin.member-savings', ['member_id' => $member->id])}}" class="btn btn-xs btn-flat btn-block btn-primary">Savings</a></td>
+                                <td class="text-center"><a href="" class="text-info"><i class="fas fa-pen"></i></a></td>
+                            </tr>
+                        @empty
+                            <tr>
+                                <td colspan="7" class="text-center text-info">No records to display</td>
+                            </tr>
+                        @endforelse
                     </tbody>
                 </table>
             </div>
@@ -115,9 +50,7 @@
     <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
     <script>
         $(document).ready(function () {
-            let table = new DataTable('#member_table', {
-
-            })
+            $('#member_table').dataTable();
         })
     </script>
 @stop

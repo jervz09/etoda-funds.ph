@@ -3,6 +3,9 @@
 @section('content_header')
     <h1>Loans</h1>
 @stop
+@section('css')
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
+@stop
 @section('content')
     <div class="container-fluid px-2 py-2">
         <div class="card">
@@ -16,80 +19,58 @@
                         <th>Due</th>
                         <th>Paid</th>
                         <th>Balance</th>
-                        <th class="text-center" colspan="2">
-                            Status
+                        <th class="text-center">
+                            Action
                         </th>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>Renelle Sapin</td>
-                            <td>4/6/22</td>
-                            <td>4/12/22</td>
-                            <td>3%</td>
-                            <td>6 180.00</td>
-                            <td>6 000.00</td>
-                            <td>180.00</td>
-                            <td class="text-center"><a href="" class="text-info"><i class="fas fa-pen"></i></a></td>
-                            <td class="text-center"><a href="" class="text-danger"><i class="fas fa-trash"></i></a></td>
-                        </tr>
-                        <tr>
-                            <td>Alberto Sotto Jr.</td>
-                            <td>4/7/22</td>
-                            <td>4/13/22</td>
-                            <td>3%</td>
-                            <td>1 000.00</td>
-                            <td>1 000.00</td>
-                            <td>0.00</td>
-                            <td class="text-center"><a href="" class="text-info"><i class="fas fa-pen"></i></a></td>
-                            <td class="text-center"><a href="" class="text-danger"><i class="fas fa-trash"></i></a></td>
-                        </tr>
-                        <tr>
-                            <td>Alexis Smith</td>
-                            <td>4/8/22</td>
-                            <td>4/14/22</td>
-                            <td>3%</td>
-                            <td>1 500.00</td>
-                            <td>500.00</td>
-                            <td>1 000.00</td>
-                            <td class="text-center"><a href="" class="text-info"><i class="fas fa-pen"></i></a></td>
-                            <td class="text-center"><a href="" class="text-danger"><i class="fas fa-trash"></i></a></td>
-                        </tr>
-                        <tr>
-                            <td>Tyler Frost</td>
-                            <td>4/10/22</td>
-                            <td>4/16/22</td>
-                            <td>3%</td>
-                            <td>2 500.00</td>
-                            <td>1 500.00</td>
-                            <td>1 000.00</td>
-                            <td class="text-center"><a href="" class="text-info"><i class="fas fa-pen"></i></a></td>
-                            <td class="text-center"><a href="" class="text-danger"><i class="fas fa-trash"></i></a></td>
-                        </tr>
-                        <tr>
-                            <td>Racy Hudgens</td>
-                            <td>4/11/22</td>
-                            <td>4/17/22</td>
-                            <td>3%</td>
-                            <td>3 200.00</td>
-                            <td>2 000.00</td>
-                            <td>1 200.00</td>
-                            <td class="text-center"><a href="" class="text-info"><i class="fas fa-pen"></i></a></td>
-                            <td class="text-center"><a href="" class="text-danger"><i class="fas fa-trash"></i></a></td>
-                        </tr>
-                        <tr>
-                            <td>Vincenzo Cailles</td>
-                            <td>4/12/22</td>
-                            <td>4/18/22</td>
-                            <td>3%</td>
-                            <td>6 000.00</td>
-                            <td>6 000.00</td>
-                            <td>0.00</td>
-                            <td class="text-center"><a href="" class="text-info"><i class="fas fa-pen"></i></a></td>
-                            <td class="text-center"><a href="" class="text-danger"><i class="fas fa-trash"></i></a></td>
-                        </tr>
+                        @forelse ($loans as $loan)
+                            <tr>
+                                <td>{{$loan->member->user->name}}</td>
+                                <td>{{$loan->release_date}}</td>
+                                <td>{{$loan->maturity_date}}</td>
+                                <td>{{$loan->interest.'%'}} <br> <span class="text-info">
+                                    @switch($loan->terms)
+                                        @case(0)
+                                            Daily
+                                            @break
+                                        @case(1)
+                                            Weekly
+                                            @break
+                                        @case(2)
+                                            Bi-weekly
+                                            @break
+                                        @case(3)
+                                            Monthly
+                                            @break
+                                        @case(4)
+                                            Quarterly
+                                            @break
+                                        @default
+                                            NA
+                                    @endswitch
+                                </span></td>
+                                <td>{{$loan->amount}}</td>
+                                <td></td>
+                                <td>{{$loan->balance}}</td>
+                                <td class="text-center"><a href="" class="text-info"><i class="fas fa-pen"></i></a></td>
+                            </tr>
+                        @empty
+                            <tr>
+                                <td colspan="8">No records to show</td>
+                            </tr>
+                        @endforelse
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
+@stop
+@section('js')
+    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#loans_table').dataTable();
+        })
+    </script>
 @stop

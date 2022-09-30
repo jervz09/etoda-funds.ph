@@ -21,19 +21,19 @@
                 <div class="col-sm-9">
                     <div class="card w-full">
                         <div class="card-header">
-                            <h4 class="card-title">Renelle Sapin</h4>
+                            <h4 class="card-title">{{$member->user->name}}</h4>
                         </div>
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-6">
-                                    <p>Female, 24 years old</p>
+                                    <p>{{ucfirst($member->gender)}}</p>
                                     <br>
-                                    <p><span class="text-bold">Toda Group: </span>Mayondon Toda</p>
+                                    <p><span class="text-bold">Toda Group: </span>{{$member->toda_group}}</p>
                                 </div>
                                 <div class="col-6">
-                                    <p><span class="text-bold">Address: </span>Brgy. Mayondon Los Banos, Laguna</p>
-                                    <p><span class="text-bold">Mobile Number: </span>9687375922</p>
-                                    <p><span class="text-bold">E-mail: </span>sapinrenelle721@gmail.com</p>
+                                    <p><span class="text-bold">Address: </span>{{$member->address}}</p>
+                                    <p><span class="text-bold">Mobile Number: </span>{{$member->mobile_number}}</p>
+                                    <p><span class="text-bold">E-mail: </span>{{$member->user->email}}</p>
                                 </div>
                             </div>
                         </div>
@@ -45,50 +45,74 @@
             <div class="row">
                 <div class="col-12">
                     <div class="card">
-                        <div class="card-header text-center">
-                            <h1 class="card-title text-bold text-info">
-                                Loans
+                        <div class="card-header text-center justify-center align-items-center">
+                            <h1 class="card-title text-bold text-dark">
+                                Savings
                             </h1>
                         </div>
                         <div class="card-body">
-                            <form action="" method="post">
+                            <form action="{{route('admin.add-savings')}}" method="post">
                                 @csrf
-                                <p class="bg-gray px-2">Loan Terms</p>
-                                <div class="form-row mt-3">
-                                    <label for="amount" class="col-3">Loan Amount</label>
-                                    <input type="text" name="amount" id="amount" class="col-3 form-control">
-                                    <div class="col-1"></div>
-                                    <label for="interest" class="col-2">Loan Interest %:</label>
-                                    <input type="number" name="interest" id="interest" class="col-3 form-control" min="0" max="15">
-                                </div>
-                                <div class="form-row mt-3">
-                                    <label for="release_date" class="col-3">Loan Release Date</label>
-                                    <input type="date" name="release_date" id="release_date" class="col-3 form-control">
+                                <input type="hidden" name="member_id" value="{{$member->id}}">
+                                <div class="form-row">
                                     <div class="col-3"></div>
-                                    <select name="terms" id="terms" class="col-3 form-control">
-                                        <option value="0">Daily</option>
-                                        <option value="1">Weekly</option>
-                                        <option value="2">Bi-Weekly</option>
-                                        <option value="3">Monthly</option>
-                                        <option value="4">Quarterly</option>
-                                    </select>
+                                    <label for="plate_number" class="col-3">Plate Number:</label>
+                                    <div class="col-3">
+                                        <input type="text" name="plate_number" class="text-center form-control @error('plate_number')
+                                            is-invalid
+                                        @enderror" value="{{$member->plate_number}}" readonly>
+                                    </div>
+                                    <div class="col-3"></div>
                                 </div>
-                                <div class="form-row mt-3">
-                                    <label for="maturity_date" class="col-3">Loan Maturity Date</label>
-                                    <input type="date" name="maturity_date" id="maturity_date" class="col-3 form-control">
+                                <div class="form-row mt-2">
+                                    <div class="col-3"></div>
+                                    <label for="cur_balance" class="col-3">Current Balance:</label>
+                                    <div class="col-3">
+                                        <input type="text" name="cur_balance" id="cur_balance" class="text-center form-control @error('cur_balance')
+                                            is-invalid
+                                        @enderror" value="{{floatval($savings)}}" readonly>
+                                    </div>
+                                    <div class="col-3"></div>
                                 </div>
-                                <p class="bg-gray px-2 mt-5">Payments</p>
-                                <div class="form-row mt-3">
-                                    <label for="due" class="col-2">Amount Due</label>
-                                    <input type="text" name="due" id="due" class="col-2 form-control">
-                                    <label for="paid" class="col-2">Amount Paid</label>
-                                    <input type="text" name="paid" id="paid" class="col-2 form-control">
-                                    <label for="balance" class="col-2">Outstanding Balance</label>
-                                    <input type="text" name="balance" id="balance" class="col-2 form-control">
+                                <div class="form-row mt-2">
+                                    <div class="col-3"></div>
+                                    <label for="amount_paid" class="col-3">Amount Paid:</label>
+                                    <div class="col-3">
+                                        <input type="text" name="amount_paid" id="amount_paid" class="text-center form-control @error('amount_paid')
+                                            is-invalid
+                                        @enderror" value="{{old('amount_paid')}}">
+                                        @error('amount_paid')
+                                            <span class="text-danger">{{$message}}</span>
+                                        @enderror
+                                    </div>
+                                    <div class="col-3"></div>
                                 </div>
-                                <div class="form-row mt-3">
-                                    <div class="col-10"></div>
-                                    <button type="submit" class="btn btn-success pull-right col-2">Submit</button>
+                                <div class="form-row mt-2">
+                                    <div class="col-3"></div>
+                                    <label for="new_balance" class="col-3">New Balance:</label>
+                                    <div class="col-3">
+                                        <input type="text" name="new_balance" id="new_balance" class="text-center form-control @error('new_balance')
+                                            is-invalid
+                                        @enderror" readonly>
+                                    </div>
+                                    <div class="col-3"></div>
+                                </div>
+                                <div class="form-row mt-2">
+                                    <div class="col-3"></div>
+                                    <label for="date_updated" class="col-3">Date Updated:</label>
+                                    <div class="col-3">
+                                        <input type="date" name="date_updated" class="text-center form-control @error('date_updated')
+                                            is-invalid
+                                        @enderror" value="{{date('Y-m-d')}}" readonly>
+                                    </div>
+                                    <div class="col-3"></div>
+                                </div>
+                                <div class="form-row mt-4">
+                                    <div class="col-4"></div>
+                                    <div class="col-4">
+                                        <input type="submit" value="Submit" class="btn btn-block btn-success">
+                                    </div>
+                                    <div class="col-4"></div>
                                 </div>
                             </form>
                         </div>
@@ -97,4 +121,20 @@
             </div>
         </div>
     </div>
+@stop
+@section('js')
+    <script>
+        $(document).ready(function() {
+            $('#amount_paid').keyup(function(event){
+
+                if(event.which != 8 && isNaN(String.fromCharCode(event.which))){
+                    event.preventDefault(); //stop character from entering input
+                }
+                var cur = parseFloat($('#cur_balance').val())
+                var amount = parseFloat($('#amount_paid').val());
+                var new_bal = parseInt(cur + amount);
+                $('#new_balance').val(Math.round(new_bal * 100 / 100).toFixed(2))
+            });
+        });
+    </script>
 @stop
