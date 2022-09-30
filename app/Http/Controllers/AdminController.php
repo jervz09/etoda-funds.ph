@@ -110,12 +110,12 @@ class AdminController extends Controller
                 ]);
             }
 
-            Session::flash('message', 'Member information has been successfully registered');
 
-            return redirect()->route('admin.new-member');
         });
 
+        Session::flash('message', 'Member information has been successfully registered');
 
+        return redirect()->route('admin.new-member');
     }
 
     public function view_member_savings_record(Request $request)
