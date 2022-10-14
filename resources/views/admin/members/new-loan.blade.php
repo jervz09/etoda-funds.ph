@@ -70,7 +70,7 @@
                                     <div class="col-3">
                                         <input type="number" name="interest" id="interest" class="form-control @error('interest')
                                             is-invalid
-                                        @enderror" min="0" max="15" value="{{old('interest')}}">
+                                        @enderror" min="0" max="15" value="3" readonly>
                                         @error('interest')
                                             <span class="text-danger mt-1">{{$message}}</span>
                                         @enderror
@@ -107,12 +107,16 @@
                                     <div class="col-3">
                                         <input type="date" name="maturity_date" id="maturity_date" class="form-control @error('maturity_date')
                                             is-invalid
-                                        @enderror">
+                                        @enderror" readonly>
                                         @error('maturity_date')
                                             <span class="text-danger mt-1">
                                                 {{$message}}
                                             </span>
                                         @enderror
+                                    </div>
+                                    <label for="repayment_amount" class="col-3">Repayment Amount</label>
+                                    <div class="col-3">
+                                        <input type="text" name="repayment_amount" id="repayment_amount" class="form-control" readonly>
                                     </div>
                                 </div>
                                 <div class="form-row mt-3">
@@ -126,4 +130,56 @@
             </div>
         </div>
     </div>
+@stop
+@section('js')
+    <script>
+        $('#terms').on('change', function() {
+            var release_date = new Date($('#release_date').val())
+            var terms = $('#terms').find(':selected').val()
+
+            switch(terms)
+            {
+                case '0': release_date.setDate(release_date.getDate() + parseInt(1, 10));
+                        break;
+                case '1': release_date.setDate(release_date.getDate() + parseInt(7, 10));
+                        break;
+                case '2': release_date.setDate(release_date.getDate() + parseInt(14, 10));
+                        break;
+                case '3': release_date.setDate(release_date.getDate() + parseInt(30, 10));
+                        break;
+                case '4': release_date.setDate(release_date.getDate() + parseInt(90, 10));
+                        break;
+                default: console.log('invalid');
+            }
+            var maturity = $.date(release_date)
+            $('#maturity_date').val(maturity)
+
+
+        })
+
+        $.date = function(dateObject) {
+            var d = new Date(dateObject);
+            var day = d.getDate();
+            var month = d.getMonth() + 1;
+            var year = d.getFullYear();
+            if (day < 10) {
+                day = "0" + day;
+            }
+            if (month < 10) {
+                month = "0" + month;
+            }
+            var date = year + "-" + month + "-" + day;
+
+            return date;
+        }
+
+        $('#amount').on('keyup', function(event) {
+            if(event.which != 8 && isNaN(String.fromCharCode(event.which))){
+                    event.preventDefault(); //stop character from entering input
+                }
+                var loan = parseFloat($('#amount').val())
+                var repayment = parseFloat(loan * 1.03)
+                $('#repayment_amount').val(Math.round(repayment * 100 / 100).toFixed(2))
+        })
+    </script>
 @stop

@@ -22,7 +22,7 @@ Route::get('/', function () {
 })->name('/');
 
 Route::get('/home', [HomeController::class, 'index']);
-
+Route::get('dashboard', [HomeController::class, 'dashboard'])->name('user.home');
 
 Route::get('admin/home', [AdminController::class, 'index'])->name('admin.home')->middleware('is_admin');
 Route::get('admin/members', [AdminController::class, 'members'])->name('admin.members')->middleware('is_admin');
