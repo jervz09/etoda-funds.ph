@@ -171,7 +171,7 @@ return [
     'classes_auth_header' => '',
     'classes_auth_body' => '',
     'classes_auth_footer' => '',
-    'classes_auth_icon' => '',
+    'classes_auth_icon' => 'fa-fw text-light',
     'classes_auth_btn' => 'btn-flat btn-primary',
 
     /*
@@ -297,11 +297,6 @@ return [
         ],
 
         // Sidebar items:
-        [
-            'text' => 'blog',
-            'url'  => 'admin/blog',
-            'can'  => 'manage-blog',
-        ],
         [
             'text'        => 'Home',
             'url'         => 'admin/home',

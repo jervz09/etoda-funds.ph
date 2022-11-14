@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,6 +25,9 @@ Auth::routes();
 Route::get('/', [HomeController::class, 'index']);
 Route::get('/home', [HomeController::class, 'index']);
 Route::get('dashboard', [HomeController::class, 'dashboard'])->name('user.home');
+
+// Route::get('/home', [UserController::class, 'index'])->name('user.home')->middleware('is_user');
+Route::get('/savings', [UserController::class, 'savings'])->name('user.savings')->middleware('is_user');
 
 Route::get('admin/home', [AdminController::class, 'index'])->name('admin.home')->middleware('is_admin');
 Route::get('admin/members', [AdminController::class, 'members'])->name('admin.members')->middleware('is_admin');
