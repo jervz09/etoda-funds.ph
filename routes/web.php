@@ -17,10 +17,11 @@ use App\Http\Controllers\AdminController;
 
 Auth::routes();
 
-Route::get('/', function () {
-    return view('welcome');
-})->name('/');
+// Route::get('/', function () {
+//     return view('welcome');
+// })->name('/');
 
+Route::get('/', [HomeController::class, 'index']);
 Route::get('/home', [HomeController::class, 'index']);
 Route::get('dashboard', [HomeController::class, 'dashboard'])->name('user.home');
 
