@@ -292,7 +292,7 @@ return [
     'menu' => [
         // Navbar items:
         [
-            'type'         => 'fullscreen-widget',
+            // 'type'         => 'fullscreen-widget',
             'topnav_right' => true,
         ],
 
@@ -306,6 +306,7 @@ return [
             'text'        => 'Toda Members',
             'url'         => 'admin/members',
             'icon'        => 'fas fa-fw fa-users',
+            'can'         => 'is_Admin'
         ],
         [
             'text'        => 'Savings',
