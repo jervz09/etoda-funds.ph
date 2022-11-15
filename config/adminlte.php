@@ -312,16 +312,37 @@ return [
             'text'        => 'Savings',
             'url'         => 'admin/savings',
             'icon'        => 'fas fa-wallet',
+            'can'         => 'is_Admin'
         ],
         [
             'text'        => 'Loans',
             'url'         => 'admin/loans',
             'icon'        => 'fas fa-money-bill',
+            'can'         => 'is_Admin'
         ],
         [
             'text'        => 'Reports',
             'url'         => 'admin/reports',
             'icon'        => 'fas fa-chart-line',
+            'can'         => 'is_Admin'
+        ],
+        [
+            'text'        => 'Savings',
+            'url'         => 'savings',
+            'icon'        => 'fas fa-wallet',
+            'can'         => 'is_User'
+        ],
+        [
+            'text'        => 'Loans',
+            'url'         => 'loans',
+            'icon'        => 'fas fa-money-bill',
+            'can'         => 'is_User'
+        ],
+        [
+            'text'        => 'Reports',
+            'url'         => 'reports',
+            'icon'        => 'fas fa-chart-line',
+            'can'         => 'is_User'
         ],
     ],
 

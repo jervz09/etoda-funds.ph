@@ -28,6 +28,8 @@ Route::get('dashboard', [HomeController::class, 'dashboard'])->name('user.home')
 
 // Route::get('/home', [UserController::class, 'index'])->name('user.home')->middleware('is_user');
 Route::get('/savings', [UserController::class, 'savings'])->name('user.savings')->middleware('is_user');
+Route::get('/loans', [UserController::class, 'loans'])->name('user.loans')->middleware('is_user');
+Route::get('/reports', [UserController::class, 'reports'])->name('user.reports')->middleware('is_user');
 
 Route::get('admin/home', [AdminController::class, 'index'])->name('admin.home')->middleware('is_admin');
 Route::get('admin/members', [AdminController::class, 'members'])->name('admin.members')->middleware('is_admin');
