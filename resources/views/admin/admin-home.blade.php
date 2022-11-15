@@ -85,16 +85,15 @@
 
         <div class="row">
             <div class="col-12">
-                <div class="card">
-                    <div class="card-header">
-                        <h2 class="card-title">Announcements</h2>
-                    </div>
-                    <div class="card-body">
-                        <p class="text-justify">
-                            Attention! The renewal of franchise is on December 2022.
-                            Have a good day!
-                        </p>
-                    </div>
+                <div class="alert alert-success" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="alert-heading">Announcements!</h4>
+                    <p>Attention! The renewal of franchise is on December 2022.
+                        Have a good day!</p>
+                    <hr>
+                    {{-- <p class="mb-0">Whenever you need to, be sure to use margin utilities to keep things nice and tidy.</p> --}}
                 </div>
             </div>
         </div>
