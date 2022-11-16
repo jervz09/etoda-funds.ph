@@ -86,13 +86,13 @@ class AdminController extends Controller
         $file->move($destinationPath,$file_name);
 
         DB::transaction(function () use($validated, $destinationPath, $file_name){
-            $username = substr($validated['first_name'], 0, 2).$validated['last_name'];
+            $username = $validated['first_name']."_".$validated['last_name'];
             $user = User::create([
                 'name' => $validated['first_name'].' '.$validated['last_name'],
                 'email' => $validated['email'],
                 'username' => $username,
                 'is_admin' => 0,
-                'password' => Hash::make(Str::random(6)),
+                'password' => Hash::make($username.'123'),
             ]);
 
             if($user)
