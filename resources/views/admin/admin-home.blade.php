@@ -20,7 +20,7 @@
                                       <p>Member</p>
                                     </div>
                                     <div class="icon">
-                                      <i class="fas fa-user-plus"></i>
+                                      <i class="fas fa-users"></i>
                                     </div>
                                     <a href="#" class="small-box-footer">
                                       More info <i class="fas fa-arrow-circle-right"></i>
@@ -49,7 +49,7 @@
                                       <p>Total Loans Released</p>
                                     </div>
                                     <div class="icon">
-                                      <i class="fas fa-cash"></i>
+                                      <i class="fas fa-money-bill"></i>
                                     </div>
                                     <a href="#" class="small-box-footer">
                                       More info <i class="fas fa-arrow-circle-right"></i>
