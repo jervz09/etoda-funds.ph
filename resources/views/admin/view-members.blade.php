@@ -28,7 +28,7 @@
                         @forelse ($members as $member)
                             <tr>
                                 <td>{{$member->first_name.' '.$member->last_name}}</td>
-                                <td></td>
+                                <td>{{\Carbon\Carbon::parse($member->birthdate)->age;}}</td>
                                 <td>{{$member->gender}}</td>
                                 <td>{{$member->mobile_number}}</td>
                                 <td><a href="{{route('admin.member-loans', ['member_id' => $member->id])}}" class="btn btn-xs btn-flat btn-block btn-success">Loans</a></td>

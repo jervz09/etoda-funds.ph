@@ -21,7 +21,9 @@
                             <div class="form-row">
                                 <label for="first_name" class="col-3">First Name</label>
                                 <div class="col-9">
-                                    <input type="text" name="first_name" id="first_name" class="form-control @error('first_name') is-invalid @enderror" value="{{ old('first_name') }}">
+                                    <input type="text" name="first_name" id="first_name" class="form-control @error('first_name')
+                                        is-invalid
+                                    @enderror" value="{{ old('first_name') }}">
                                     @error('first_name')
                                         <span class="text-danger text-sm">{{$message}}</span>
                                     @enderror
@@ -90,7 +92,17 @@
                                     @enderror
                                 </div> --}}
                                 {{-- <div class="col-1"></div> --}}
-                                <label for="toda_group" class="col-3">Toda Group</label>
+                                <label for="birthdate" class="col-3">Birthdate</label>
+                                <div class="col-3">
+                                    <input type="date" name="birthdate" id="birthdate" class="form-control @error('birthdate')
+                                        is-invalid
+                                    @enderror">
+                                    @error('birthdate')
+                                        <div class="alert alert-danger text-sm">{{$message}}</div>
+                                    @enderror
+                                </div>
+                                <div class="col-1"></div>
+                                <label for="toda_group" class="col-2">Toda Group</label>
                                 <div class="col-3">
                                     <select name="toda_group" id="toda_group" class="form-control @error('toda_group')
                                         is-invalid

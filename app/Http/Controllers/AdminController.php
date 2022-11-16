@@ -63,11 +63,12 @@ class AdminController extends Controller
             'first_name' => 'required|max:255',
             'last_name' => 'required|max:255',
             'gender' => 'required',
+            'birthdate' => 'required',
             'mobile_number' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10',
             'address' => 'required',
             'toda_group' => 'required',
             'plate_number' => 'required|max:7',
-            'member_photo' => 'required|mimes:jpg,bmp,svg,png',
+            'member_photo' => 'mimes:jpg,bmp,svg,png',
         ]);
 
         if($validator->fails()) {
@@ -77,14 +78,16 @@ class AdminController extends Controller
         }
 
         $validated = $validator->validated();
-
+        $file_name = "";
+        $destinationPath = "";
         $file = $request->member_photo;
+        if($file){
+            $file_name = $file->getClientOriginalName();
+            $file_path = $file->getRealPath();
 
-        $file_name = $file->getClientOriginalName();
-        $file_path = $file->getRealPath();
-
-        $destinationPath = 'uploads/member_photos';
-        $file->move($destinationPath,$file_name);
+            $destinationPath = 'uploads/member_photos';
+            $file->move($destinationPath,$file_name);
+        }
 
         DB::transaction(function () use($validated, $destinationPath, $file_name){
             $username = $validated['first_name']."_".$validated['last_name'];
@@ -102,6 +105,7 @@ class AdminController extends Controller
                     'first_name' => $validated['first_name'],
                     'last_name' => $validated['last_name'],
                     'gender' => $validated['gender'],
+                    'birthdate' => $validated['birthdate'],
                     'mobile_number' => $validated['mobile_number'],
                     'address' => $validated['address'],
                     'toda_group' => $validated['toda_group'],

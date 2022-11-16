@@ -15,6 +15,7 @@ class Member extends Model
         'first_name',
         'last_name',
         'gender',
+        'birthdate',
         'mobile_number',
         'address',
         'toda_group',
