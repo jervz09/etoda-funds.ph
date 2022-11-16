@@ -54,6 +54,7 @@
                             <form action="{{route('admin.create-new-loan')}}" method="post">
                                 @csrf
                                 <input type="hidden" name="member_id" value="{{$member->id}}">
+                                <input type="hidden" name="user_id" value="{{$member->user_id}}">
                                 <p class="bg-gray px-2">Loan Terms</p>
                                 <div class="form-row mt-3">
                                     <label for="amount" class="col-3">Loan Amount</label>
@@ -107,7 +108,7 @@
                                     <div class="col-3">
                                         <input type="date" name="maturity_date" id="maturity_date" class="form-control @error('maturity_date')
                                             is-invalid
-                                        @enderror" readonly>
+                                        @enderror">
                                         @error('maturity_date')
                                             <span class="text-danger mt-1">
                                                 {{$message}}
