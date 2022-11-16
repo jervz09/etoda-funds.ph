@@ -153,7 +153,7 @@ return [
     | this array to grant expanded functionality to your applications.
     |
     */
-
+    'Input' => Illuminate\Support\Facades\Request::class,
     'providers' => [
 
         /*

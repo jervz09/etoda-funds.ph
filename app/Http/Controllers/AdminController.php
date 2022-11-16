@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Str;
 use Session;
 
@@ -62,9 +63,8 @@ class AdminController extends Controller
             'first_name' => 'required|max:255',
             'last_name' => 'required|max:255',
             'gender' => 'required',
-            'mobile_number' => 'required',
+            'mobile_number' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10',
             'address' => 'required',
-            'email' => 'required|email:rfc,dns|unique:users',
             'toda_group' => 'required',
             'plate_number' => 'required|max:7',
             'member_photo' => 'required|mimes:jpg,bmp,svg,png',
@@ -73,7 +73,7 @@ class AdminController extends Controller
         if($validator->fails()) {
             return redirect()->route('admin.new-member')
                         ->withErrors($validator)
-                        ->withInput();
+                        ->withInput($request->input());
         }
 
         $validated = $validator->validated();
@@ -90,7 +90,6 @@ class AdminController extends Controller
             $username = $validated['first_name']."_".$validated['last_name'];
             $user = User::create([
                 'name' => $validated['first_name'].' '.$validated['last_name'],
-                'email' => $validated['email'],
                 'username' => $username,
                 'is_admin' => 0,
                 'password' => Hash::make($username.'123'),

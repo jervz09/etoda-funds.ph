@@ -21,7 +21,7 @@
                             <div class="form-row">
                                 <label for="first_name" class="col-3">First Name</label>
                                 <div class="col-9">
-                                    <input type="text" name="first_name" id="first_name" class="form-control @error('first_name') is-invalid @enderror">
+                                    <input type="text" name="first_name" id="first_name" class="form-control @error('first_name') is-invalid @enderror" value="{{ old('first_name') }}">
                                     @error('first_name')
                                         <span class="text-danger text-sm">{{$message}}</span>
                                     @enderror
@@ -32,7 +32,7 @@
                                 <div class="col-9">
                                     <input type="text" name="last_name" id="last_name" class="form-control @error('last_name')
                                         is-invalid
-                                    @enderror">
+                                    @enderror" value="{{ old('last_name') }}">
                                     @error('last_name')
                                         <div class="alert alert-danger text-sm">{{$message}}</div>
                                     @enderror
@@ -80,7 +80,7 @@
                                 </div>
                             </div>
                             <div class="form-row mt-2">
-                                <label for="email" class="col-3">Email Address</label>
+                                {{-- <label for="email" class="col-3">Email Address</label>
                                 <div class="col-3">
                                     <input type="email" name="email" id="email" class="form-control @error('email')
                                         is-invalid
@@ -88,9 +88,9 @@
                                     @error('email')
                                         <div class="alert alert-danger text-sm">{{$message}}</div>
                                     @enderror
-                                </div>
-                                <div class="col-1"></div>
-                                <label for="toda_group" class="col-2">Toda Group</label>
+                                </div> --}}
+                                {{-- <div class="col-1"></div> --}}
+                                <label for="toda_group" class="col-3">Toda Group</label>
                                 <div class="col-3">
                                     <select name="toda_group" id="toda_group" class="form-control @error('toda_group')
                                         is-invalid
@@ -120,7 +120,7 @@
                                 <div class="col-3">
                                     <input type="text" name="plate_number" id="plate_number" class="form-control @error('plate_number')
                                         is-invalid
-                                    @enderror">
+                                    @enderror" value="{{ old('plate_number') }}">
                                     @error('plate_number')
                                         <div class="alert alert-danger text-sm">{{$message}}</div>
                                     @enderror
@@ -131,7 +131,7 @@
                                 <div class="col-3">
                                     <input type="file" name="member_photo" id="member_photo" class="form-control @error('member_photo')
                                         is-invalid
-                                    @enderror">
+                                    @enderror" value="{{ old('member_photo') }}">
                                     @error('member_photo')
                                         <div class="alert alert-danger text-sm">{{$message}}</div>
                                     @enderror

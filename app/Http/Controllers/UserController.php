@@ -63,7 +63,6 @@ class UserController extends Controller
             'gender' => 'required',
             'mobile_number' => 'required',
             'address' => 'required',
-            'email' => 'required|email:rfc,dns|unique:users',
             'toda_group' => 'required',
             'plate_number' => 'required|max:7',
             'member_photo' => 'required|mimes:jpg,bmp,svg,png',
@@ -89,7 +88,6 @@ class UserController extends Controller
             $username = substr($validated['first_name'], 0, 2).$validated['last_name'];
             $user = User::create([
                 'name' => $validated['first_name'].' '.$validated['last_name'],
-                'email' => $validated['email'],
                 'username' => $username,
                 'is_admin' => 0,
                 'password' => Hash::make(Str::random(6)),
