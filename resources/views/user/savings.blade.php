@@ -26,7 +26,9 @@
                                 <td>{{$member->transactions->where('transaction_type', 0)->sum('amount')}}</td>
                                 <td>
                                     @if($member->transactions->where('transaction_type', 0)->count() != 0)
-                                        {{$member->transactions->where('transaction_type', 0)->last()->created_at->format('F j, Y h:i a')}} <br> <span class="text-info">{{number_format((float)$member->transactions->where('transaction_type', 0)->last()->amount, 2, '.', '')}}</span>
+                                        {{$member->transactions->where('transaction_type', 0)->last()->created_at->format('F j, Y h:i a')}}
+                                        <br>
+                                        <span class="text-info">{{number_format((float)$member->transactions->where('transaction_type', 0)->last()->amount, 2, '.', '')}}</span>
                                     @endif
                                 </td>
                                 <td class="text-center"><a href="{{route('admin.update-member-savings-record', ['member_id' => $member->id])}}" class="text-info"><i class="fas fa-pen"></i></a></td>
