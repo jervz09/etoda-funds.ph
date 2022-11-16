@@ -178,6 +178,7 @@ class AdminController extends Controller
         $member = Member::find($request->member_id);
         $validator = Validator::make($request->all(), [
             'member_id' => 'required',
+            'user_id' => 'required',
             'amount' => 'required',
             'interest' => 'required',
             'release_date' => 'required',
@@ -196,6 +197,7 @@ class AdminController extends Controller
         DB::transaction(function () use($validated){
             Loan::create([
                 'member_id' => $validated['member_id'],
+                'user_id' => $validated['user_id'],
                 'amount' => $validated['amount'],
                 'release_date' => $validated['release_date'],
                 'maturity_date' => $validated['maturity_date'],
