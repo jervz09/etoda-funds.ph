@@ -13,71 +13,67 @@
                     </div>
                     <div class="card-body">
                         <div class="row">
-                            <div class="col-6">
-                                <div class="info-box">
-                                    <span class="info-box-icon bg-info elevation-1">
-                                        <i class="fa fa-users"></i>
-                                    </span>
-                                    <div class="info-box-content">
-                                        <span class="info-box-text">
-                                            Registered Members
-                                        </span>
-                                        <span class="info-box-number text-right">
-                                            {{ $members_count }}
-                                        </span>
+                            <div class="col-3">
+                                <div class="small-box bg-info">
+                                    <div class="inner">
+                                      <h3>{{$members_count}}</h3>
+                                      <p>Member</p>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="col-6">
-                                <div class="info-box">
-                                    <span class="info-box-icon bg-success elevation-1">
-                                        <i class="fas fa-wallet"></i>
-                                    </span>
-                                    <div class="info-box-content">
-                                        <span class="info-box-text">
-                                            Total Savings
-                                        </span>
-                                        <span class="info-box-number text-right">
-                                            <strong>₱</strong>
-                                            15 000
-                                        </span>
+                                    <div class="icon">
+                                      <i class="fas fa-user-plus"></i>
                                     </div>
-                                </div>
+                                    <a href="#" class="small-box-footer">
+                                      More info <i class="fas fa-arrow-circle-right"></i>
+                                    </a>
+                                  </div>
                             </div>
+                            <div class="col-3">
+                                <div class="small-box bg-gradient-success">
+                                    <div class="inner">
+                                      <h3><strong>₱</strong>
+                                        15 000</h3>
+                                      <p>Total Savings</p>
+                                    </div>
+                                    <div class="icon">
+                                      <i class="fas fa-wallet"></i>
+                                    </div>
+                                    <a href="#" class="small-box-footer">
+                                      More info <i class="fas fa-arrow-circle-right"></i>
+                                    </a>
+                                  </div>
+                            </div>
+                            <div class="col-3">
+                                <div class="small-box bg-gradient-warning">
+                                    <div class="inner">
+                                      <h3>299</h3>
+                                      <p>Total Loans Released</p>
+                                    </div>
+                                    <div class="icon">
+                                      <i class="fas fa-cash"></i>
+                                    </div>
+                                    <a href="#" class="small-box-footer">
+                                      More info <i class="fas fa-arrow-circle-right"></i>
+                                    </a>
+                                  </div>
+                            </div>
+
+                            <div class="col-3">
+                                <div class="small-box bg-gradient-danger">
+                                    <div class="inner">
+                                      <h3>5</h3>
+                                      <p>Fully Paid Loans</p>
+                                    </div>
+                                    <div class="icon">
+                                      <i class="fas fa-cash-register"></i>
+                                    </div>
+                                    <a href="#" class="small-box-footer">
+                                      More info <i class="fas fa-arrow-circle-right"></i>
+                                    </a>
+                                  </div>
+                            </div>
+
                         </div>
-                        <div class="row">
-                            <div class="col-6">
-                                <div class="info-box">
-                                    <span class="info-box-icon bg-warning elevation-1">
-                                        <i class="fas fa-cash-register"></i>
-                                    </span>
-                                    <div class="info-box-content">
-                                        <span class="info-box-text">
-                                            Total Loans Released
-                                        </span>
-                                        <span class="info-box-number text-right">
-                                            <strong>₱</strong>
-                                            350 000
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-6">
-                                <div class="info-box">
-                                    <span class="info-box-icon bg-warning elevation-1">
-                                        <i class="fas fa-cash-register"></i>
-                                    </span>
-                                    <div class="info-box-content">
-                                        <span class="info-box-text">
-                                            Fully Paid Loans
-                                        </span>
-                                        <span class="info-box-number text-right">
-                                            10
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+
                     </div>
                 </div>
             </div>
