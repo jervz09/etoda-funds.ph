@@ -24,7 +24,8 @@ class AdminController extends Controller
 
     public function index()
     {
-        return view('admin.admin-home');
+        $members_count = Member::count();
+        return view('admin.admin-home',['members_count' => $members_count]);
     }
 
     public function members()

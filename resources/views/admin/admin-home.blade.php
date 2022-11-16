@@ -23,7 +23,7 @@
                                             Registered Members
                                         </span>
                                         <span class="info-box-number text-right">
-                                            230
+                                            {{ $members_count }}
                                         </span>
                                     </div>
                                 </div>
