@@ -135,6 +135,12 @@
 @section('js')
     <script>
         $('#terms').on('change', function() {
+            update_maturity_date()
+        })
+        $('#release_date').on('change', function() {
+            update_maturity_date()
+        })
+        let update_maturity_date = () => {
             var release_date = new Date($('#release_date').val())
             var terms = $('#terms').find(':selected').val()
 
@@ -154,10 +160,7 @@
             }
             var maturity = $.date(release_date)
             $('#maturity_date').val(maturity)
-
-
-        })
-
+        }
         $.date = function(dateObject) {
             var d = new Date(dateObject);
             var day = d.getDate();
