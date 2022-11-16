@@ -10,6 +10,7 @@ class Loan extends Model
     use HasFactory;
 
     protected $fillable = [
+        'user_id',
         'member_id',
         'amount',
         'release_date',

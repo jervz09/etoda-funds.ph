@@ -41,7 +41,7 @@ class UserController extends Controller
 
     public function loans()
     {
-        $loans = Loan::latest()->where('id', auth()->user()->id);
+        $loans = Loan::latest()->where('user_id', auth()->user()->id)->get();
         return view('user.loans', ['loans' => $loans]);
     }
 
