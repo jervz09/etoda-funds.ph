@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Input;
+use Redirect;
 
 class LoginController extends Controller
 {
@@ -65,9 +67,7 @@ class LoginController extends Controller
 
         }else{
 
-            return redirect()->route('login')
-
-                ->with('error','Email-Address And Password Are Wrong.');
+            return Redirect::to('login')->withInput($request->input())->with('errors', ['Authentication failed.']);
 
         }
     }

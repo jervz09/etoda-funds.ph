@@ -19,16 +19,45 @@
     {{-- @php( $register_url = $register_url ? url($register_url) : '' ) --}}
     @php( $password_reset_url = $password_reset_url ? url($password_reset_url) : '' )
 @endif
-
+@section('style')
+<style>
+    alert-danger {
+        color: #721c24;
+        background-color: #f8d7da;
+        border-color: #f5c6cb;
+    }
+</style>
+@stop
 @section('auth_header', __('adminlte::adminlte.login_message'))
 
 @section('auth_body')
     <form action="{{ $login_url }}" method="post">
-        @csrf
 
+        @if( Session::get('errors') )
+
+        <ul class="error" style="padding: 0;width: 100%;">
+            @foreach( Session::get('errors') as $message )
+                @if(is_array($message))
+                    @foreach( $message as $subMessage )
+                        <div class="alert alert-danger" role="alert" style="margin: 0;width: 100%;">
+                            {{ $subMessage }}
+                        </div>
+                    @endforeach
+                @else
+
+                    <div class="alert alert-danger" role="alert" style="margin: 0;width: 100%;">
+                        {{ $message }}
+                    </div>
+                @endif
+            @endforeach
+        </ul>
+
+        @endif
+
+        @csrf
         {{-- Email field --}}
         <div class="input-group mb-3">
-            <input type="username" name="username" class="form-control @error('username') is-invalid @enderror"
+            <input type="username" name="username" class="form-control"
                    value="{{ old('username') }}" placeholder="Username" autofocus required>
 
             <div class="input-group-append">
@@ -36,30 +65,19 @@
                     <span class="fas fa-envelope {{ config('adminlte.classes_auth_icon', '') }}"></span>
                 </div>
             </div>
-
-            @error('email')
-                <span class="invalid-feedback" role="alert">
-                    <strong>{{ $message }}</strong>
-                </span>
-            @enderror
         </div>
 
         {{-- Password field --}}
         <div class="input-group mb-3">
-            <input type="password" name="password" class="form-control @error('password') is-invalid @enderror"
+            <input type="password" name="password" id="inp_password" class="form-control"
                    placeholder="{{ __('adminlte::adminlte.password') }}" required>
 
             <div class="input-group-append">
                 <div class="input-group-text">
                     <span class="fas fa-lock {{ config('adminlte.classes_auth_icon', '') }}"></span>
+                    <span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password">
                 </div>
             </div>
-
-            @error('password')
-                <span class="invalid-feedback" role="alert">
-                    <strong>{{ $message }}</strong>
-                </span>
-            @enderror
         </div>
 
         {{-- Login field --}}
@@ -83,4 +101,17 @@
         </div>
 
     </form>
+@stop
+@section('js')
+<script>
+    $(".toggle-password").click(function() {
+        $(this).toggleClass("fa-eye fa-eye-slash");
+        var input = $("#inp_password");
+        if (input.attr("type") == "password") {
+            input.attr("type", "text");
+        } else {
+            input.attr("type", "password");
+        }
+    });
+</script>
 @stop
