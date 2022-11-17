@@ -37,18 +37,18 @@
                         <form action="login" method="post">
                             @csrf
                             <div class="form-group mb-2 row">
-                                <label for="email" class="text-bold">Email Address</label>
+                                <label for="username" class="text-bold">Username</label>
                                 <div class="input-group">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text">
                                             <i class="bi bi-envelope"></i>
                                         </span>
                                     </div>
-                                    <input type="email" name="email" id="email" class="form-control" placeholder="you@example.com">
+                                    <input type="text" name="userbane" id="userbane" class="form-control" placeholder="Username">
                                 </div>
                             </div>
                             <div class="form-group mb-2 row">
-                                <label for="email" class="text-bold">Password</label>
+                                <label for="password" class="text-bold">Password</label>
                                 <div class="input-group">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text">
@@ -59,7 +59,7 @@
                                 </div>
                             </div>
                             <div class="form-group mb-2 row">
-                                @error('email')
+                                @error('username')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
