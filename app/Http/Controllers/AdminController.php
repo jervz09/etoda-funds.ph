@@ -90,7 +90,7 @@ class AdminController extends Controller
         }
 
         DB::transaction(function () use($validated, $destinationPath, $file_name){
-            $username = $validated['first_name']."_".$validated['last_name'];
+            $username = strtolower(substr($validated['first_name'], 0, 2).$validated['last_name']);
             $user = User::create([
                 'name' => $validated['first_name'].' '.$validated['last_name'],
                 'username' => $username,
