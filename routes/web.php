@@ -34,10 +34,14 @@ Route::get('/loans', [UserController::class, 'loans'])->name('user.loans')->midd
 Route::get('/reports', [UserController::class, 'reports'])->name('user.reports')->middleware('is_user');
 
 
-Route::get('/profile_setting', [UserController::class, 'profile_setting'])->name('user.profile_setting')->middleware('is_user');
+Route::get('user/profile_setting', [UserController::class, 'profile_setting'])->name('user.profile_setting')->middleware('is_user');
+Route::post('user/update_profile_setting', [UserController::class, 'update_profile_setting'])->name('user.update_profile_setting');
+
+Route::get('admin/profile_setting', [AdminController::class, 'profile_setting'])->name('admin.profile_setting')->middleware('is_admin');
+Route::post('admin/update_profile_setting', [AdminController::class, 'update_profile_setting'])->name('admin.update_profile_setting');
+
 
 Route::get('admin/home', [AdminController::class, 'index'])->name('admin.home')->middleware('is_admin');
-Route::get('admin/profile_setting', [AdminController::class, 'profile_setting'])->name('admin.profile_setting')->middleware('is_admin');
 Route::get('admin/members', [AdminController::class, 'members'])->name('admin.members')->middleware('is_admin');
 Route::get('admin/savings', [AdminController::class, 'savings'])->name('admin.savings')->middleware('is_admin');
 Route::get('admin/loans', [AdminController::class, 'loans'])->name('admin.loans')->middleware('is_admin');
@@ -50,7 +54,4 @@ Route::get('admin/add-new-loan-record', [AdminController::class, 'add_new_loan_r
 Route::post('admin/create-new-loan', [AdminController::class, 'new_loan'])->name('admin.create-new-loan')->middleware('is_admin');
 Route::post('admin/add-member', [AdminController::class, 'add_new_member'])->name('add-member');
 Route::post('admin/add-savings', [AdminController::class, 'add_savings'])->name('admin.add-savings');
-
-Route::post('admin/update_profile_setting', [AdminController::class, 'update_profile_setting'])->name('admin.profile_setting');
-// Route::post('update_profile_setting', [AdminController::class, 'update_profile_setting'])->name('admin.update_profile_setting');
 

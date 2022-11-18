@@ -268,6 +268,7 @@ class AdminController extends Controller
             // $username = strtolower(substr($validated['first_name'], 0, 2).$validated['last_name']);?
             $user = User::where('id',$validated['user_id'])->update([
                 'name' => $validated['first_name'].' '.$validated['last_name'],
+                'username' => $validated['username'],
             ]);
 
             if($user)

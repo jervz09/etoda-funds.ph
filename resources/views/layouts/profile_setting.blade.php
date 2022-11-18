@@ -34,6 +34,9 @@
                                 $format_birthdate = date('Y-m-d',strtotime($member->birthdate));
                                 $plate_number = $member->plate_number;
                                 $member_photo = $member->photo_url;
+                                if ($member_photo == "/"){
+                                    $member_photo = 'uploads/member_photos/etoda-default-image.png';
+                                }
 
                             @endphp
                         @endforeach

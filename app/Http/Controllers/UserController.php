@@ -27,11 +27,6 @@ class UserController extends Controller
         return view('user.user-home');
     }
 
-    public function profile_setting()
-    {
-        return view('layouts.profile_setting');
-    }
-
     public function members()
     {
         $members = Member::get();
@@ -212,5 +207,82 @@ class UserController extends Controller
         Session::flash('message', 'Loan Record successfully created.');
 
         return redirect()->route('admin.member-loans', ['member_id' => $member->id]);
+    }
+
+
+    public function profile_setting(Request $request)
+    {
+        $user = User::where('id',auth()->user()->id)->get();
+        $member = Member::where('user_id', auth()->user()->id)->get();
+        return view('layouts.profile_setting', ['user_id' => auth()->user()->id, 'user' => $user, 'member' => $member]);
+    }
+
+    public function update_profile_setting(Request $request)
+    {
+
+        $validator = Validator::make($request->all(), [
+            'first_name' => 'required|max:255',
+            'last_name' => 'required|max:255',
+            'gender' => 'required',
+            'birthdate' => 'required',
+            'mobile_number' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10',
+            'address' => 'required',
+            'toda_group' => 'required',
+            'plate_number' => 'required|max:7',
+            'member_photo' => 'mimes:jpg,bmp,svg,png',
+            'username' => 'required',
+            'user_id' => 'required',
+        ]);
+
+        if($validator->fails()) {
+
+            $user = User::where('id',$request->input()['user_id'])->get();
+            $member = Member::where('user_id', $request->input()['user_id'])->get();
+            return view('layouts.profile_setting', ['user_id' => $request->input()['user_id'], 'user' => $user, 'member' => $member])
+                        ->withErrors($validator)
+                        ->withInput($request->input());
+        }
+
+        $validated = $validator->validated();
+        $file_name = "";
+        $destinationPath = "";
+        $file = $request->member_photo;
+        if($file){
+            $file_name = $file->getClientOriginalName();
+            $file_path = $file->getRealPath();
+
+            $destinationPath = 'uploads/member_photos';
+            $file->move($destinationPath,$file_name);
+        }
+
+        DB::transaction(function () use($validated, $destinationPath, $file_name){
+            // $username = strtolower(substr($validated['first_name'], 0, 2).$validated['last_name']);?
+            $user = User::where('id',$validated['user_id'])->update([
+                'name' => $validated['first_name'].' '.$validated['last_name'],
+                'username' => $validated['username'],
+            ]);
+
+            if($user)
+            {
+                Member::where('user_id',$validated['user_id'])->update([
+                    'user_id' => $validated['user_id'],
+                    'first_name' => $validated['first_name'],
+                    'last_name' => $validated['last_name'],
+                    'gender' => $validated['gender'],
+                    'birthdate' => $validated['birthdate'],
+                    'mobile_number' => $validated['mobile_number'],
+                    'address' => $validated['address'],
+                    'toda_group' => $validated['toda_group'],
+                    'plate_number' => $validated['plate_number'],
+                    'photo_url' => $destinationPath.'/'.$file_name,
+                ]);
+            }
+
+
+        });
+
+        session()->flash('message', 'Member information has been successfully registered');
+
+        return redirect()->route('user.profile_setting');
     }
 }
