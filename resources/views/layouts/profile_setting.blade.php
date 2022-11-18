@@ -5,23 +5,19 @@
         Profile Settings
     </h1>
 @stop
-<link href="{{ asset('css/app.css') }}" rel="stylesheet" type="text/css" >
+
 @section('content')
     <div class="container-fluid px-2 py-2">
         <div class="row">
             <div class="col-12">
                 <div class="card">
-                    <div class="card-header">{{ asset('css/app.css') }}
+                    <div class="card-header">
                         @if(session()->has('message'))
                             <p class="alert alert-success">{!! session()->get('message') !!}</p>
                         @endif
                     </div>
                     <div class="card-body ">
-                        <div id="profile-container">
-                            <img id="profileImage" src="http://picsum.photos/100/100" />
-                         </div>
-                         <input id="imageUpload" type="file"
-                                name="profile_photo" placeholder="Photo" required="" capture>
+
                         @foreach ($user as $user)
                             @php
                                 $username = $user->username;
@@ -30,8 +26,27 @@
                             @break
                         @endforeach
                         @foreach ($member as $member)
-                        <form action="add-member" method="post" enctype="multipart/form-data">
+                            @php
+                                $first_name = $member->first_name;
+                                $last_name = $member->last_name;
+                                $mobile_number = $member->mobile_number;
+                                $address = $member->address;
+                                $format_birthdate = date('m-d-Y',strtotime($member->birthdate));
+                                $plate_number = $member->plate_number;
+
+                            @endphp
+                        @endforeach
+                        <form action="update_profile_setting" method="post" enctype="multipart/form-data">
                             @csrf
+                            <div class="profile-pic">
+                                <label class="-label" for="file">
+                                  <span class="glyphicon glyphicon-camera"></span>
+                                  <span>Change Image</span>
+                                </label>
+                                <input id="file" type="file" onchange="loadFile(event)"/>
+                                <img src="https://cdn.pixabay.com/photo/2017/08/06/21/01/louvre-2596278_960_720.jpg" id="output" width="200" />
+                            </div>
+                            <input type="hidden" id="user_id" name="user_id" value="{{ $user_id }}">
                             <div class="form-row">
                                 <label for="username" class="col-3">Username</label>
                                 <div class="col-9">
@@ -48,7 +63,7 @@
                                 <div class="col-3">
                                     <input type="text" name="first_name" id="first_name" class="form-control @error('first_name')
                                         is-invalid
-                                    @enderror" value="{{$member->first_name}}">
+                                    @enderror" value="{{$first_name}}">
                                     @error('first_name')
                                         <span class="text-danger text-sm">{{$message}}</span>
                                     @enderror
@@ -58,7 +73,7 @@
                                 <div class="col-3">
                                     <input type="text" name="last_name" id="last_name" class="form-control @error('last_name')
                                         is-invalid
-                                    @enderror" value="{{ $member->last_name }}">
+                                    @enderror" value="{{ $last_name }}">
                                     @error('last_name')
                                         <div class="alert alert-danger text-sm">{{$message}}</div>
                                     @enderror
@@ -87,7 +102,7 @@
                                         </div>
                                         <input type="text" id="mobile_number" name="mobile_number" class="form-control @error('mobile_number')
                                             is-invalid
-                                        @enderror" value="{{$member->mobile_number}}">
+                                        @enderror" value="{{$mobile_number}}">
                                     </div>
                                     @error('mobile_number')
                                         <div class="alert alert-danger text-sm">{{$message}}</div>
@@ -99,7 +114,7 @@
                                 <div class="col-9">
                                     <input type="text" name="address" id="address" class="form-control @error('address')
                                         is-invalid
-                                    @enderror" value="{{$member->address}}">
+                                    @enderror" value="{{$address}}">
                                     @error('address')
                                         <div class="alert alert-danger text-sm">{{$message}}</div>
                                     @enderror
@@ -120,7 +135,7 @@
                                 <div class="col-3">
                                     <input type="date" name="birthdate" id="birthdate" class="form-control @error('birthdate')
                                         is-invalid
-                                    @enderror" value="{{date('m-d-Y',strtotime($member->birthdate))}}">
+                                    @enderror" value="{{ $format_birthdate }}">
                                     @error('birthdate')
                                         <div class="alert alert-danger text-sm">{{$message}}</div>
                                     @enderror
@@ -156,8 +171,18 @@
                                 <div class="col-3">
                                     <input type="text" name="plate_number" id="plate_number" class="form-control @error('plate_number')
                                         is-invalid
-                                    @enderror" value="{{$member->plate_number}}">
+                                    @enderror" value="{{ $plate_number }}">
                                     @error('plate_number')
+                                        <div class="alert alert-danger text-sm">{{$message}}</div>
+                                    @enderror
+                                </div>
+
+                                <label for="password" class="col-3">Password</label>
+                                <div class="col-3">
+                                    <input type="text" name="password" id="password" class="form-control @error('password')
+                                        is-invalid
+                                    @enderror">
+                                    @error('password')
                                         <div class="alert alert-danger text-sm">{{$message}}</div>
                                     @enderror
                                 </div>
@@ -180,7 +205,6 @@
                                 </div>
                             </div>
                         </form>
-                        @endforeach
                     </div>
                 </div>
             </div>
@@ -202,5 +226,11 @@
             return false;
         }
     });
+
+    var loadFile = function (event) {
+        var image = document.getElementById("output");
+        image.src = URL.createObjectURL(event.target.files[0]);
+    };
+
 </script>
 @stop

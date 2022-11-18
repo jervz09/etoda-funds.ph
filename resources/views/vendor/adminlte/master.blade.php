@@ -32,6 +32,8 @@
 
         <link rel="stylesheet" href="{{ asset('vendor/adminlte/dist/css/adminlte.min.css') }}">
 
+        <link href="{{ asset('assets/css/profile_setting.css') }}" rel="stylesheet" >
+
         @if(config('adminlte.google_fonts.allowed', true))
             <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
         @endif

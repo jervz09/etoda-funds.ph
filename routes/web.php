@@ -51,3 +51,6 @@ Route::post('admin/create-new-loan', [AdminController::class, 'new_loan'])->name
 Route::post('admin/add-member', [AdminController::class, 'add_new_member'])->name('add-member');
 Route::post('admin/add-savings', [AdminController::class, 'add_savings'])->name('admin.add-savings');
 
+Route::post('admin/update_profile_setting', [AdminController::class, 'update_profile_setting'])->name('admin.profile_setting');
+// Route::post('update_profile_setting', [AdminController::class, 'update_profile_setting'])->name('admin.update_profile_setting');
+
