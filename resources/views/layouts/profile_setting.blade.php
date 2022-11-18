@@ -1,40 +1,64 @@
 @extends('adminlte::page')
-@section('title', 'Add New Member')
+@section('title', 'Profile Settings')
 @section('content_header')
     <h1 class="text-bold">
-        Add New Member
+        Profile Settings
     </h1>
 @stop
+<link href="{{ asset('css/app.css') }}" rel="stylesheet" type="text/css" >
 @section('content')
     <div class="container-fluid px-2 py-2">
         <div class="row">
             <div class="col-12">
                 <div class="card">
-                    <div class="card-header">
+                    <div class="card-header">{{ asset('css/app.css') }}
                         @if(session()->has('message'))
                             <p class="alert alert-success">{!! session()->get('message') !!}</p>
                         @endif
                     </div>
                     <div class="card-body ">
+                        <div id="profile-container">
+                            <img id="profileImage" src="http://picsum.photos/100/100" />
+                         </div>
+                         <input id="imageUpload" type="file"
+                                name="profile_photo" placeholder="Photo" required="" capture>
+                        @foreach ($user as $user)
+                            @php
+                                $username = $user->username;
+                                $password = $user->password;
+                            @endphp
+                            @break
+                        @endforeach
+                        @foreach ($member as $member)
                         <form action="add-member" method="post" enctype="multipart/form-data">
                             @csrf
                             <div class="form-row">
-                                <label for="first_name" class="col-3">First Name</label>
+                                <label for="username" class="col-3">Username</label>
                                 <div class="col-9">
-                                    <input type="text" name="first_name" id="first_name" class="form-control @error('first_name')
+                                    <input type="text" name="username" id="username" class="form-control @error('username')
                                         is-invalid
-                                    @enderror" value="{{ old('first_name') }}">
-                                    @error('first_name')
+                                    @enderror" value="{{$username}}">
+                                    @error('username')
                                         <span class="text-danger text-sm">{{$message}}</span>
                                     @enderror
                                 </div>
                             </div>
                             <div class="form-row mt-2">
-                                <label for="last_name" class="col-3">Last Name</label>
-                                <div class="col-9">
+                                <label for="first_name" class="col-3">First Name</label>
+                                <div class="col-3">
+                                    <input type="text" name="first_name" id="first_name" class="form-control @error('first_name')
+                                        is-invalid
+                                    @enderror" value="{{$member->first_name}}">
+                                    @error('first_name')
+                                        <span class="text-danger text-sm">{{$message}}</span>
+                                    @enderror
+                                </div>
+                                <div class="col-1"></div>
+                                <label for="last_name" class="col-2">Last Name</label>
+                                <div class="col-3">
                                     <input type="text" name="last_name" id="last_name" class="form-control @error('last_name')
                                         is-invalid
-                                    @enderror" value="{{ old('last_name') }}">
+                                    @enderror" value="{{ $member->last_name }}">
                                     @error('last_name')
                                         <div class="alert alert-danger text-sm">{{$message}}</div>
                                     @enderror
@@ -63,7 +87,7 @@
                                         </div>
                                         <input type="text" id="mobile_number" name="mobile_number" class="form-control @error('mobile_number')
                                             is-invalid
-                                        @enderror">
+                                        @enderror" value="{{$member->mobile_number}}">
                                     </div>
                                     @error('mobile_number')
                                         <div class="alert alert-danger text-sm">{{$message}}</div>
@@ -75,7 +99,7 @@
                                 <div class="col-9">
                                     <input type="text" name="address" id="address" class="form-control @error('address')
                                         is-invalid
-                                    @enderror">
+                                    @enderror" value="{{$member->address}}">
                                     @error('address')
                                         <div class="alert alert-danger text-sm">{{$message}}</div>
                                     @enderror
@@ -96,7 +120,7 @@
                                 <div class="col-3">
                                     <input type="date" name="birthdate" id="birthdate" class="form-control @error('birthdate')
                                         is-invalid
-                                    @enderror">
+                                    @enderror" value="{{date('m-d-Y',strtotime($member->birthdate))}}">
                                     @error('birthdate')
                                         <div class="alert alert-danger text-sm">{{$message}}</div>
                                     @enderror
@@ -132,23 +156,23 @@
                                 <div class="col-3">
                                     <input type="text" name="plate_number" id="plate_number" class="form-control @error('plate_number')
                                         is-invalid
-                                    @enderror" value="{{ old('plate_number') }}">
+                                    @enderror" value="{{$member->plate_number}}">
                                     @error('plate_number')
                                         <div class="alert alert-danger text-sm">{{$message}}</div>
                                     @enderror
                                 </div>
                             </div>
-                            <div class="form-row mt-2">
+                            {{-- <div class="form-row mt-2">
                                 <label for="member_photo" class="col-3">Member's Photo</label>
                                 <div class="col-3">
                                     <input type="file" name="member_photo" id="member_photo" class="form-control @error('member_photo')
                                         is-invalid
-                                    @enderror" value="{{ old('member_photo') }}">
+                                    @enderror" value="{{$member->member_photo}}">
                                     @error('member_photo')
                                         <div class="alert alert-danger text-sm">{{$message}}</div>
                                     @enderror
                                 </div>
-                            </div>
+                            </div> --}}
                             <div class="form-row">
                                 <div class="col-10"></div>
                                 <div class="col-2">
@@ -156,6 +180,7 @@
                                 </div>
                             </div>
                         </form>
+                        @endforeach
                     </div>
                 </div>
             </div>

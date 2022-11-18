@@ -48,9 +48,9 @@
                         <h2 class="card-title text-bold h3">
                             Loans History
                         </h2>
-                        @if(Session::has('message'))
+                        @if(session()->has('message'))
                             <div class="alert alert-success">
-                                {{Session::get('message')}}
+                                {{session()->get('message')}}
                             </div>
                         @endif
                     </div>

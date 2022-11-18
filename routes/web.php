@@ -5,6 +5,8 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\UserController;
 
+use Illuminate\Support\Facades\Auth;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -32,10 +34,10 @@ Route::get('/loans', [UserController::class, 'loans'])->name('user.loans')->midd
 Route::get('/reports', [UserController::class, 'reports'])->name('user.reports')->middleware('is_user');
 
 
-Route::get('/profile_settings', [UserController::class, 'profile_settings'])->name('user.profile_settings')->middleware('is_user');
+Route::get('/profile_setting', [UserController::class, 'profile_setting'])->name('user.profile_setting')->middleware('is_user');
 
 Route::get('admin/home', [AdminController::class, 'index'])->name('admin.home')->middleware('is_admin');
-Route::get('admin/profile_settings', [AdminController::class, 'profile_settings'])->name('admin.profile_settings')->middleware('is_admin');
+Route::get('admin/profile_setting', [AdminController::class, 'profile_setting'])->name('admin.profile_setting')->middleware('is_admin');
 Route::get('admin/members', [AdminController::class, 'members'])->name('admin.members')->middleware('is_admin');
 Route::get('admin/savings', [AdminController::class, 'savings'])->name('admin.savings')->middleware('is_admin');
 Route::get('admin/loans', [AdminController::class, 'loans'])->name('admin.loans')->middleware('is_admin');

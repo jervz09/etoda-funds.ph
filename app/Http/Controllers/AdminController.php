@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Str;
 use Session;
+use Auth;
 
 use App\Models\User;
 use App\Models\Member;
@@ -27,6 +28,14 @@ class AdminController extends Controller
     {
         $members_count = Member::count();
         return view('admin.admin-home',['members_count' => $members_count]);
+    }
+
+    public function profile_setting(Request $request)
+    {
+        // dd($request->input());
+        $user = User::where('id',$request->input())->get();
+        $member = Member::where('user_id', $request->input())->get();
+        return view('layouts.profile_setting', ['user' => $user, 'member' => $member]);
     }
 
     public function members()
@@ -117,7 +126,7 @@ class AdminController extends Controller
 
         });
 
-        Session::flash('message', 'Member information has been successfully registered');
+        session()->flash('message', 'Member information has been successfully registered');
 
         return redirect()->route('admin.new-member');
     }
@@ -158,7 +167,7 @@ class AdminController extends Controller
 
         });
 
-        Session::flash('message', 'Savings successfully recorded');
+        session()->flash('message', 'Savings successfully recorded');
 
         return redirect()->route('admin.update-member-savings-record', ['member_id' => $request->member_id]);
 
@@ -212,7 +221,7 @@ class AdminController extends Controller
             ]);
         });
 
-        Session::flash('message', 'Loan Record successfully created.');
+        session()->flash('message', 'Loan Record successfully created.');
 
         return redirect()->route('admin.member-loans', ['member_id' => $member->id]);
     }

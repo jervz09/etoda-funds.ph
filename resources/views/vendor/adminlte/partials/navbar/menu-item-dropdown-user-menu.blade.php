@@ -7,10 +7,10 @@
       <!-- Notifications Dropdown Menu -->
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="usernameDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            {{ Auth::user()->name }}
+            {{ auth()->user()->name }}
         </a>
         <div class="dropdown-menu" aria-labelledby="usernameDropdown">
-          <a class="dropdown-item" href="{{ route('profile_settings') }}"><i class="fa fa-user-circle"></i> Profile Settings</a>
+          <a class="dropdown-item" href="{{ url('admin/profile_setting?user='.auth()->user()->id) }}"><i class="fa fa-user-circle"></i> Profile Settings</a>
           <div class="dropdown-divider"></div>
           <a class="dropdown-item" href="{{ route('logout') }}"
             onclick="event.preventDefault();

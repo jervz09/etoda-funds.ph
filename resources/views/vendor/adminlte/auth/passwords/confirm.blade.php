@@ -6,8 +6,8 @@
 
 @section('classes_body', 'lockscreen')
 
-@php( $password_reset_url = View::getSection('password_reset_url') ?? config('adminlte.password_reset_url', 'password/reset') )
-@php( $dashboard_url = View::getSection('dashboard_url') ?? config('adminlte.dashboard_url', 'home') )
+@php( $password_reset_url = view()->getSection('password_reset_url') ?? config('adminlte.password_reset_url', 'password/reset') )
+@php( $dashboard_url = view()->getSection('dashboard_url') ?? config('adminlte.dashboard_url', 'home') )
 
 @if (config('adminlte.use_route_url', false))
     @php( $password_reset_url = $password_reset_url ? route($password_reset_url) : '' )
@@ -30,14 +30,14 @@
 
         {{-- Lockscreen user name --}}
         <div class="lockscreen-name">
-            {{ isset(Auth::user()->name) ? Auth::user()->name : Auth::user()->email }}
+            {{ isset(auth()->user()->name) ? auth()->user()->name : auth()->user()->email }}
         </div>
 
         {{-- Lockscreen item --}}
         <div class="lockscreen-item">
             @if(config('adminlte.usermenu_image'))
                 <div class="lockscreen-image">
-                    <img src="{{ Auth::user()->adminlte_image() }}" alt="{{ Auth::user()->name }}">
+                    <img src="{{ auth()->user()->adminlte_image() }}" alt="{{ auth()->user()->name }}">
                 </div>
             @endif
 

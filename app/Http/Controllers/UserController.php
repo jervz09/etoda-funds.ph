@@ -27,6 +27,11 @@ class UserController extends Controller
         return view('user.user-home');
     }
 
+    public function profile_setting()
+    {
+        return view('layouts.profile_setting');
+    }
+
     public function members()
     {
         $members = Member::get();

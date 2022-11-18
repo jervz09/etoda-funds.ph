@@ -1,6 +1,6 @@
 @extends('adminlte::auth.auth-page', ['auth_type' => 'login'])
 
-@php( $password_email_url = View::getSection('password_email_url') ?? config('adminlte.password_email_url', 'password/email') )
+@php( $password_email_url = view()->getSection('password_email_url') ?? config('adminlte.password_email_url', 'password/email') )
 
 @if (config('adminlte.use_route_url', false))
     @php( $password_email_url = $password_email_url ? route($password_email_url) : '' )
