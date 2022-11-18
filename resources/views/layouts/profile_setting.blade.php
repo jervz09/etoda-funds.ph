@@ -7,6 +7,9 @@
 @stop
 
 @section('content')
+@php
+    $member_photo = 'uploads/member_photos/etoda-default-image.png';
+@endphp
     <div class="container-fluid px-2 py-2">
         <div class="row">
             <div class="col-12">
