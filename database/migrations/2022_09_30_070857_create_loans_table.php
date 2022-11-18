@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('loans', function (Blueprint $table) {
             $table->id();
+            $table->integer('user_id');
             $table->foreignId('member_id')->onDelete('cascade')->onUpdate('cascade');
             $table->integer('amount');
             $table->date('release_date');

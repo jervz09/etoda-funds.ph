@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('first_name');
             $table->string('last_name');
             $table->string('gender');
+            $table->string('birthdate');
             $table->string('mobile_number');
             $table->string('address');
             $table->string('toda_group');
