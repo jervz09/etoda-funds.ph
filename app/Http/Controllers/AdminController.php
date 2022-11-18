@@ -27,7 +27,8 @@ class AdminController extends Controller
     public function index()
     {
         $members_count = Member::count();
-        return view('admin.admin-home',['members_count' => $members_count]);
+        $total_savings = Transaction::sum('amount');
+        return view('admin.admin-home',['members_count' => $members_count,'total_savings' => $total_savings]);
     }
 
     public function profile_setting(Request $request)
