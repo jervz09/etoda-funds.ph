@@ -31,8 +31,9 @@
                                 $last_name = $member->last_name;
                                 $mobile_number = $member->mobile_number;
                                 $address = $member->address;
-                                $format_birthdate = date('m-d-Y',strtotime($member->birthdate));
+                                $format_birthdate = date('Y-m-d',strtotime($member->birthdate));
                                 $plate_number = $member->plate_number;
+                                $member_photo = $member->photo_url;
 
                             @endphp
                         @endforeach
@@ -43,8 +44,8 @@
                                   <span class="glyphicon glyphicon-camera"></span>
                                   <span>Change Image</span>
                                 </label>
-                                <input id="file" type="file" onchange="loadFile(event)"/>
-                                <img src="https://cdn.pixabay.com/photo/2017/08/06/21/01/louvre-2596278_960_720.jpg" id="output" width="200" />
+                                <input name="member_photo" id="file" type="file" onchange="loadFile(event)"/>
+                                <img src="/{{ $member_photo }}" id="output" width="200" />
                             </div>
                             <input type="hidden" id="user_id" name="user_id" value="{{ $user_id }}">
                             <div class="form-row">
@@ -173,16 +174,6 @@
                                         is-invalid
                                     @enderror" value="{{ $plate_number }}">
                                     @error('plate_number')
-                                        <div class="alert alert-danger text-sm">{{$message}}</div>
-                                    @enderror
-                                </div>
-
-                                <label for="password" class="col-3">Password</label>
-                                <div class="col-3">
-                                    <input type="text" name="password" id="password" class="form-control @error('password')
-                                        is-invalid
-                                    @enderror">
-                                    @error('password')
                                         <div class="alert alert-danger text-sm">{{$message}}</div>
                                     @enderror
                                 </div>

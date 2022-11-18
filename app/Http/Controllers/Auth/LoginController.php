@@ -67,7 +67,7 @@ class LoginController extends Controller
 
         }else{
 
-            return Redirect::to('login')->withInput($request->input())->with('errors', ['Authentication failed.']);
+            return redirect()->route('login')->withInput($request->input())->with('errors', ['Authentication failed.']);
 
         }
     }
