@@ -9,7 +9,7 @@
             <div class="row">
                 <div class="col-sm-2">
                     <div class="row">
-                        <img src="/{{ auth()->user()->photo_url }}" alt="" class="rounded-circle img-thumbnail img-fluid" >
+                        <img src="{{asset($member->photo_url)}}" alt="" class="rounded-circle img-thumbnail img-fluid" >
                     </div>
                     {{-- <div class="row">
                         <div class="col-12 text-center">
