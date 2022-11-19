@@ -34,8 +34,14 @@ Route::get('/loans', [UserController::class, 'loans'])->name('user.loans')->midd
 Route::get('/reports', [UserController::class, 'reports'])->name('user.reports')->middleware('is_user');
 
 
+Route::get('user/privacy_setting', [UserController::class, 'privacy_setting'])->name('user.privacy_setting')->middleware('is_user');
+Route::get('user/update_privacy_setting', [UserController::class, 'privacy_setting'])->name('user.privacy_setting')->middleware('is_user');
+
 Route::get('user/profile_setting', [UserController::class, 'profile_setting'])->name('user.profile_setting')->middleware('is_user');
 Route::post('user/update_profile_setting', [UserController::class, 'update_profile_setting'])->name('user.update_profile_setting');
+
+Route::get('admin/privacy_setting', [AdminController::class, 'privacy_setting'])->name('admin.privacy_setting')->middleware('is_admin');
+Route::get('admin/update_privacy_setting', [AdminController::class, 'privacy_setting'])->name('admin.privacy_setting')->middleware('is_admin');
 
 Route::get('admin/profile_setting', [AdminController::class, 'profile_setting'])->name('admin.profile_setting')->middleware('is_admin');
 Route::post('admin/update_profile_setting', [AdminController::class, 'update_profile_setting'])->name('admin.update_profile_setting');

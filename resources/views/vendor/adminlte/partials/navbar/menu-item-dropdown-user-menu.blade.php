@@ -4,8 +4,10 @@
 @php
   if(auth()->user()->is_admin == 0){
     $profile_link = url('user/profile_setting');
+    $privacy_setting = url('user/privacy_setting');
   }else{
     $profile_link = url('admin/profile_setting?user='.auth()->user()->id);
+    $privacy_setting = url('admin/privacy_setting');
   }
 @endphp
     <!-- Right navbar links -->
@@ -17,6 +19,7 @@
         </a>
         <div class="dropdown-menu" aria-labelledby="usernameDropdown">
           <a class="dropdown-item" href="{{ $profile_link }}"><i class="fa fa-user-circle"></i> Profile Settings</a>
+          <a class="dropdown-item" href="{{ $privacy_setting }}"><i class="fa fa-cogs"></i> Privacy Settings</a>
           <div class="dropdown-divider"></div>
           <a class="dropdown-item" href="{{ route('logout') }}"
             onclick="event.preventDefault();
