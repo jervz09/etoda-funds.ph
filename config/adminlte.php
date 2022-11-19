@@ -300,8 +300,7 @@ return [
         [
             'text'        => 'Home',
             'url'         => 'admin/home',
-            'icon'        => 'fas fa-fw fa-home',
-            'can'         => 'is_Admin'
+            'icon'        => 'fas fa-fw fa-home'
         ],
         [
             'text'        => 'Toda Members',
