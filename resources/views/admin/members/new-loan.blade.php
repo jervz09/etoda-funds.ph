@@ -186,23 +186,16 @@
             $('#repayment_amount').val(Math.round(repayment * 100 / 100).toFixed(2))
         });
 
-        // $("#release_date").datepicker({
-        //     format: "dd-MM-yyyy",
-        //     autoclose: true,
-        // }).on('changeDate', function (selected) {
-        //     var maxDate = new Date(selected.date.valueOf());
-        //     $('#maturity_date').datepicker('option', 'maxDate', maxDate);
-        // });
-
-        // $("#maturity_date").datepicker({
-        //     todayBtn:  "linked",
-        //     format: "dd-MM-yyyy",
-        //     autoclose: true,
-        // }).on('changeDate', function (selected) {
-        //     var minDate = new Date(selected.date.valueOf());
-        //     //here you set disabled to false, and set min date for periode_end
-        //     $("#periode_end").prop("disabled", false)
-        //     .datepicker('option', 'minDate', minDate);
-        // });
+        var date = new Date();
+        var getmonth = date.getMonth() + 1;
+        var getday = date.getDate();
+        var getyear = date.getFullYear();
+        if(getmonth < 10)
+            getmonth = '0' + getmonth.toString();
+        if(getday < 10)
+            getday = '0' + getday.toString();
+        var inDate = getyear + '-' + getmonth + '-' + getday;
+        console.log(inDate);
+        $('#release_date').attr('min', inDate);
     </script>
 @stop
