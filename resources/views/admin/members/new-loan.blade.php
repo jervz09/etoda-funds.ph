@@ -103,7 +103,7 @@
                                     <div class="col-3">
                                         <input type="date" name="maturity_date" id="maturity_date" class="form-control @error('maturity_date')
                                             is-invalid
-                                        @enderror">
+                                        @enderror" disabled>
                                         @error('maturity_date')
                                             <span class="text-danger mt-1">
                                                 {{$message}}
@@ -172,13 +172,37 @@
             return date;
         }
 
-        $('#amount').on('keyup', function(event) {
+        $('#amount').on('keypress', function (evt) {
+            evt = (evt) ? evt : window.event;
+            var charCode = (evt.which) ? evt.which : evt.keyCode;
+            if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+                return false;
+            }
             if(event.which != 8 && isNaN(String.fromCharCode(event.which))){
-                    event.preventDefault(); //stop character from entering input
-                }
-                var loan = parseFloat($('#amount').val())
-                var repayment = parseFloat(loan * 1.03)
-                $('#repayment_amount').val(Math.round(repayment * 100 / 100).toFixed(2))
-        })
+                event.preventDefault(); //stop character from entering input
+            }
+            var loan = parseFloat($('#amount').val())
+            var repayment = parseFloat(loan * 1.03)
+            $('#repayment_amount').val(Math.round(repayment * 100 / 100).toFixed(2))
+        });
+
+        // $("#release_date").datepicker({
+        //     format: "dd-MM-yyyy",
+        //     autoclose: true,
+        // }).on('changeDate', function (selected) {
+        //     var maxDate = new Date(selected.date.valueOf());
+        //     $('#maturity_date').datepicker('option', 'maxDate', maxDate);
+        // });
+
+        // $("#maturity_date").datepicker({
+        //     todayBtn:  "linked",
+        //     format: "dd-MM-yyyy",
+        //     autoclose: true,
+        // }).on('changeDate', function (selected) {
+        //     var minDate = new Date(selected.date.valueOf());
+        //     //here you set disabled to false, and set min date for periode_end
+        //     $("#periode_end").prop("disabled", false)
+        //     .datepicker('option', 'minDate', minDate);
+        // });
     </script>
 @stop
