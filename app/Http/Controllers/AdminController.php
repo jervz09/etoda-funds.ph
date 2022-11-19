@@ -266,15 +266,35 @@ class AdminController extends Controller
         }
 
         DB::transaction(function () use($validated, $destinationPath, $file_name){
-            // $username = strtolower(substr($validated['first_name'], 0, 2).$validated['last_name']);?
-            $user = User::where('id',$validated['user_id'])->update([
-                'name' => $validated['first_name'].' '.$validated['last_name'],
-                'username' => $validated['username'],
-            ]);
+            $user = "";
+            if (User::where('id',$validated['user_id'])->exists()) {
+                $user = User::where('id',$validated['user_id'])->update([
+                    'name' => $validated['first_name'].' '.$validated['last_name'],
+                    'username' => $validated['username'],
+                ]);
+            }else{
+                $user = User::where('id',$request->input()['user_id'])->get();
+                $member = Member::where('user_id', $request->input()['user_id'])->get();
+                return view('layouts.profile_setting', ['user_id' => $request->input()['user_id'], 'user' => $user, 'member' => $member])
+                            ->withErrors($validator)
+                            ->withInput($request->input());
+            }
 
-            if($user)
-            {
+            if($user && Member::where('user_id',$validated['user_id'])->exists()){
                 Member::where('user_id',$validated['user_id'])->update([
+                    'user_id' => $validated['user_id'],
+                    'first_name' => $validated['first_name'],
+                    'last_name' => $validated['last_name'],
+                    'gender' => $validated['gender'],
+                    'birthdate' => $validated['birthdate'],
+                    'mobile_number' => $validated['mobile_number'],
+                    'address' => $validated['address'],
+                    'toda_group' => $validated['toda_group'],
+                    'plate_number' => $validated['plate_number'],
+                    'photo_url' => $destinationPath.'/'.$file_name,
+                ]);
+            }else{
+                Member::create([
                     'user_id' => $validated['user_id'],
                     'first_name' => $validated['first_name'],
                     'last_name' => $validated['last_name'],

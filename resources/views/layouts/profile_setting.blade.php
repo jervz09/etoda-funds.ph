@@ -8,6 +8,13 @@
 
 @section('content')
 @php
+    $first_name = "";
+    $last_name = "";
+    $mobile_number = "";
+    $address = "";
+    $format_birthdate = "";
+    $plate_number = "";
+    $member_photo = "";
     $member_photo = 'uploads/member_photos/etoda-default-image.png';
 @endphp
     <div class="container-fluid px-2 py-2">
