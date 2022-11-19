@@ -24,7 +24,7 @@ class UserController extends Controller
 
     public function index()
     {
-        return view('user.user-home');
+        return view('user.savings');
     }
 
     public function members()

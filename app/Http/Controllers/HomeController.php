@@ -26,7 +26,7 @@ class HomeController extends Controller
         if(auth()->user()->is_admin == 1){
             return redirect()->route('admin.home');
         }else {
-            return redirect()->route('user.home');
+            return redirect()->route('user.savings');
         }
 
     }
@@ -34,6 +34,6 @@ class HomeController extends Controller
     public function dashboard()
     {
         $user = auth()->user();
-        return view('user.home');
+        return view('user.savings');
     }
 }
