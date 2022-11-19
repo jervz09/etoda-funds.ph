@@ -11,11 +11,6 @@
                     <div class="row">
                         <img src="{{asset('assets/img/webarebears-200x200.png')}}" alt="" class="rounded-circle img-thumbnail img-fluid" >
                     </div>
-                    <div class="row">
-                        <div class="col-12 text-center">
-                            <a href="#" class="btn btn-xs btn-info btn-flat mt-1"><i class="fas fa-pen"></i> Edit</a>
-                        </div>
-                    </div>
                 </div>
                 <div class="col-1"></div>
                 <div class="col-sm-9">
