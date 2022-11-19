@@ -133,7 +133,18 @@
                 var cur = parseFloat($('#cur_balance').val())
                 var amount = parseFloat($('#amount_paid').val());
                 var new_bal = parseInt(cur + amount);
-                $('#new_balance').val(Math.round(new_bal * 100 / 100).toFixed(2))
+                let total_balance = Math.round(new_bal * 100 / 100).toFixed(2);
+                if(!isNaN(total_balance)){
+                    $('#new_balance').val(total_balance)
+                }
+            });
+
+            $('#amount_paid').on('keypress', function (evt) {
+                    evt = (evt) ? evt : window.event;
+                    var charCode = (evt.which) ? evt.which : evt.keyCode;
+                    if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+                        return false;
+                    }
             });
         });
     </script>
