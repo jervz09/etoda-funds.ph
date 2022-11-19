@@ -35,7 +35,9 @@ class UserController extends Controller
 
     public function savings()
     {
-        $members = Member::latest()->where('user_id', auth()->user()->id)->get();
+        $members = Member::get();
+        // dd($members);
+        // $members = Member::latest()->where('user_id', auth()->user()->id)->get();
         return view('user.savings', ['members' => $members]);
     }
 

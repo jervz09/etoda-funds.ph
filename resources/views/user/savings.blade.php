@@ -16,28 +16,30 @@
                         <th>Plate No.</th>
                         <th>Balance</th>
                         <th>Last Transaction</th>
-                        <th class="text-center">Action</th>
+                        {{-- <th class="text-center">Action</th> --}}
                     </thead>
                     <tbody>
                         @forelse ($members as $member)
-                            <tr>
-                                <td>{{$member->user->name}}</td>
-                                <td>{{$member->plate_number}}</td>
-                                <td>{{$member->transactions->where('transaction_type', 0)->sum('amount')}}</td>
-                                <td>
-                                    @if($member->transactions->where('transaction_type', 0)->count() != 0)
-                                        {{$member->transactions->where('transaction_type', 0)->last()->created_at->format('F j, Y h:i a')}}
-                                        <br>
-                                        <span class="text-info">{{number_format((float)$member->transactions->where('transaction_type', 0)->last()->amount, 2, '.', '')}}</span>
-                                    @endif
-                                </td>
-                                <td class="text-center"><a href="{{route('admin.update-member-savings-record', ['member_id' => $member->id])}}" class="text-info"><i class="fas fa-pen"></i></a></td>
-                            </tr>
+                        @php
+
+                            $m_name = $member->user->name;
+                            $m_plate_number = $member->plate_number;
+                            $m_transaction = $member->transactions;
+                        @endphp
                         @empty
                             <tr>
                                 <td colspan="5" class="text-info">No Records to show</td>
                             </tr>
                         @endforelse
+                        @foreach ( $m_transaction->where('transaction_type', 0) as $transaction)
+                            <tr>
+                                <td>{{$m_name}}</td>
+                                <td>{{$m_plate_number}}</td>
+                                <td>{{$transaction->amount}}</td>
+                                <td>{{$transaction->created_at->format('F j, Y h:i a')}}}</td>
+                                {{-- <td class="text-center"><a href="{{route('admin.update-member-savings-record', ['member_id' => $member->id])}}" class="text-info"><i class="fas fa-pen"></i></a></td> --}}
+                            </tr>
+                        @endforeach
 
                     </tbody>
                 </table>
