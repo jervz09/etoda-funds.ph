@@ -9,7 +9,7 @@
             <div class="row">
                 <div class="col-sm-2">
                     <div class="row">
-                        <img src="{{asset($member->photo_url)}}" alt="" class="rounded-circle img-thumbnail img-fluid" >
+                        <img src="{{asset($member->photo_url)}}" alt="" class="rounded-circle img-thumbnail img-fluid" style="min-width:200px;height:200px" >
                     </div>
                 </div>
                 <div class="col-1"></div>
