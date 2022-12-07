@@ -15,6 +15,7 @@ use App\Models\User;
 use App\Models\Member;
 use App\Models\Transaction;
 use App\Models\Loan;
+use App\Models\Funds;
 
 class AdminController extends Controller
 {
@@ -45,6 +46,12 @@ class AdminController extends Controller
         return view('admin.view-members', ['members' => $members]);
     }
 
+    public function funds()
+    {
+        $funds = Funds::latest()->get();
+        return view('admin.funds', ['funds' => $funds]);
+    }
+
     public function savings()
     {
         $members = Member::latest()->get();
@@ -66,6 +73,44 @@ class AdminController extends Controller
     {
         return view('admin.members.add-new');
     }
+
+    public function add_new_funds_form()
+    {
+        return view('admin.funds.add-new');
+    }
+
+
+    public function add_new_funds(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'amount' => 'required',
+            'source' => 'required',
+            'current' => 'required',
+        ]);
+
+        if($validator->fails()) {
+            return redirect()->route('admin.new-funds')
+                        ->withErrors($validator)
+                        ->withInput();
+        }
+
+        DB::transaction(function () use($request){
+            Funds::create([
+                'user_id' => $request->user_id,
+                'amount' => $request->amount,
+                'source' => $request->source,
+                'current' => $request->current
+            ]);
+
+
+        });
+
+        session()->flash('message', 'Savings successfully recorded');
+
+        return redirect()->route('admin.funds');
+
+    }
+
 
     public function add_new_member(Request $request)
     {
@@ -314,5 +359,43 @@ class AdminController extends Controller
         session()->flash('message', 'Member information has been successfully registered');
 
         return redirect()->route('admin.profile_setting',['user'=>$validated['user_id']]);
+    }
+    public function new_funds(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'member_id' => 'required',
+            'user_id' => 'required',
+            'amount' => 'required',
+            'interest' => 'required',
+            'release_date' => 'required',
+            'terms' => 'required',
+            'maturity_date' => 'required',
+        ]);
+
+        if($validator->fails()) {
+            return redirect()->route('admin.new-loan', ['member_id' => $member->id])
+                        ->withErrors($validator)
+                        ->withInput();
+        }
+
+        $validated = $validator->validated();
+
+        DB::transaction(function () use($validated){
+            Loan::create([
+                'member_id' => $validated['member_id'],
+                'user_id' => $validated['user_id'],
+                'amount' => $validated['amount'],
+                'release_date' => $validated['release_date'],
+                'maturity_date' => $validated['maturity_date'],
+                'interest' => $validated['interest'],
+                'terms' => $validated['terms'],
+                'balance' => $validated['amount'],
+                'status' => 0
+            ]);
+        });
+
+        session()->flash('message', 'Loan Record successfully created.');
+
+        return redirect()->route('admin.member-loans', ['member_id' => $member->id]);
     }
 }

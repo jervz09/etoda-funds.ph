@@ -309,9 +309,15 @@ return [
             'can'         => 'is_Admin'
         ],
         [
+            'text'        => 'Funds',
+            'url'         => 'admin/funds',
+            'icon'        => 'fas fa-fw fa-wallet',
+            'can'         => 'is_Admin'
+        ],
+        [
             'text'        => 'Savings',
             'url'         => 'admin/savings',
-            'icon'        => 'fas fa-wallet',
+            'icon'        => 'fas fa-credit-card',
             'can'         => 'is_Admin'
         ],
         [
