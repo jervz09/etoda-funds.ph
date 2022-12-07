@@ -41,7 +41,7 @@
                     <tfoot>
                         <th>Amount</th>
                         <th>Current</th>
-                        <th>Sourde</th>
+                        <th>Source</th>
                         {{-- <th class="text-center">
                             Action
                         </th> --}}

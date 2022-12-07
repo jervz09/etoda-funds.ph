@@ -83,9 +83,9 @@ class AdminController extends Controller
     public function add_new_funds(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'amount' => 'required',
+            'amount' => 'required|integer',
             'source' => 'required',
-            'current' => 'required',
+            'current' => 'required|integer',
         ]);
 
         if($validator->fails()) {
