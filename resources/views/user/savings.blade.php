@@ -36,7 +36,7 @@
                                 <td>{{$m_name}}</td>
                                 <td>{{$m_plate_number}}</td>
                                 <td>{{$transaction->amount}}</td>
-                                <td>{{$transaction->created_at->format('F j, Y h:i a')}}}</td>
+                                <td>{{$transaction->created_at->format('F j, Y h:i a')}}</td>
                                 {{-- <td class="text-center"><a href="{{route('admin.update-member-savings-record', ['member_id' => $member->id])}}" class="text-info"><i class="fas fa-pen"></i></a></td> --}}
                             </tr>
                         @endforeach
