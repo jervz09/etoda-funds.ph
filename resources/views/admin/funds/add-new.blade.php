@@ -19,7 +19,7 @@
                         @endif
                     </div>
                     <div class="card-body ">
-                        <form action="add-funds" method="post">
+                        <form action="add-funds" method="post" autocomplete="OFF">
                             @csrf
                             <input type="hidden" name="user_id" value="{{auth()->user()->id}}">
                             <div class="form-row">
