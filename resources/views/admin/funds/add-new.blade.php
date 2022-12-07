@@ -11,6 +11,9 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
+                        {{-- @if($errors->any())
+                            {{ implode('', $errors->all('<div>:message</div>')) }}
+                        @endif --}}
                         @if(session()->has('message'))
                             <p class="alert alert-success">{!! session()->get('message') !!}</p>
                         @endif
@@ -20,23 +23,23 @@
                             @csrf
                             <input type="hidden" name="user_id" value="{{auth()->user()->id}}">
                             <div class="form-row">
-                                <label for="current_amount" class="col-3">Current Amount</label>
+                                <label for="current" class="col-3">Current Amount</label>
                                 <div class="col-9">
-                                    <input type="text" name="current_amount" id="current_amount" class="form-control @error('current_amount')
+                                    <input type="text" name="current" id="current" class="form-control @error('current')
                                         is-invalid
-                                    @enderror" value="{{ old('current_amount') }}">
-                                    @error('current_amount')
+                                    @enderror" value="{{ old('current') }}">
+                                    @error('current')
                                         <span class="text-danger text-sm">{{$message}}</span>
                                     @enderror
                                 </div>
                             </div>
                             <div class="form-row mt-2">
-                                <label for="source_funds" class="col-3">Source Funds</label>
+                                <label for="source" class="col-3">Source Funds</label>
                                 <div class="col-9">
-                                    <input type="text" name="source_funds" id="source_funds" class="form-control @error('source_funds')
+                                    <input type="text" name="source" id="source" class="form-control @error('source')
                                         is-invalid
-                                    @enderror" value="{{ old('source_funds') }}">
-                                    @error('source_funds')
+                                    @enderror" value="{{ old('source') }}">
+                                    @error('source')
                                         <span class="text-danger text-sm">{{$message}}</span>
                                     @enderror
                                 </div>
